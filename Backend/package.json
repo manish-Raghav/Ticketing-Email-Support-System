@@ -1,0 +1,29 @@
+{
+  "name": "ticketing-email-support-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "App.js",
+  "scripts": {
+    "start": "node App.js",
+    "dev": "nodemon App.js",
+    "check": "node scripts/checkSyntax.js",
+    "seed:categories": "node scripts/seedCategories.js",
+    "migrate:ticket-categories": "node scripts/migrateTicketCategories.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.2",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.11.4",
+    "nodemailer": "^10.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

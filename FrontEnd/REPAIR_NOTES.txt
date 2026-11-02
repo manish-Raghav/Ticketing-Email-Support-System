@@ -1,0 +1,27 @@
+FRONTEND REPAIR NOTES
+
+What was fixed:
+1. Corrected shared component imports to match the actual folder and file names in src/Components.
+2. Fixed missing imports in src/App.jsx for AssignedTickets, ManageUsers, and the agent ticket details page.
+3. Corrected the customer ticket details import name used by the route.
+4. Updated ProtectedRoute so it supports the DashboardLayout child and nested routes.
+5. Removed stale commented imports that pointed to folders that do not exist.
+
+How to run on Windows:
+1. Extract this ZIP.
+2. Open the FrontEnd folder in VS Code.
+3. Open Terminal in the FrontEnd folder.
+4. Run: npm install
+5. Run: npm run dev
+6. Open the localhost URL shown in the terminal.
+
+If an old dependency install causes errors:
+1. Close the Vite terminal.
+2. Delete the node_modules folder.
+3. Run: npm install
+4. Run: npm run dev
+
+Note:
+- node_modules is intentionally not included; npm install recreates it for your Windows system.
+- VITE_API_URL is set to http://localhost:5000/api in .env. Make sure your backend is running on port 5000.
+- The dashboard pages still contain sample frontend data where backend integration has not yet been connected.

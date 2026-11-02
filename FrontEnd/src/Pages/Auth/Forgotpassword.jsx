@@ -1,0 +1,9 @@
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import api, { getErrorMessage } from '../../services/api';
+
+export default function ForgotPassword(){
+ const [email,setEmail]=useState(''),[loading,setLoading]=useState(false),[error,setError]=useState(''),[message,setMessage]=useState('');const navigate=useNavigate();
+ const submit=async(e)=>{e.preventDefault();setError('');setMessage('');setLoading(true);try{const {data}=await api.post('/auth/forgot-password',{email:email.trim().toLowerCase()});setMessage(data.message||'A password reset OTP has been sent.');navigate(`/reset-password?email=${encodeURIComponent(email.trim().toLowerCase())}`);}catch(err){setError(getErrorMessage(err,'Unable to request password reset.'));}finally{setLoading(false);}};
+ return <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10"><div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-7 shadow-xl"><p className="text-sm font-semibold text-blue-600">SUPPORTDESK</p><h1 className="mt-3 text-2xl font-bold text-slate-900">Forgot password?</h1><p className="mt-2 text-sm leading-6 text-slate-500">Enter your registered email. We will send you a six-digit reset OTP.</p><form onSubmit={submit} className="mt-6 space-y-4"><input type="email" required value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@example.com" className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm"/>{error&&<p role="alert" className="text-sm text-red-600">{error}</p>}{message&&<p className="text-sm text-green-700">{message}</p>}<button disabled={loading} className="w-full rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white disabled:opacity-50">{loading?'Sending...':'Send reset OTP'}</button></form><p className="mt-5 text-center text-sm text-slate-500"><Link to="/login" className="font-semibold text-blue-600">Back to login</Link></p></div></div>;
+}

@@ -1,0 +1,32 @@
+{
+  "info": {
+    "name": "Support Ticket APIs",
+    "description": "Postman requests for the ticket lifecycle, categories, conversation, activity, dashboard, and inbound email webhook.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "token", "value": "PASTE_ACCESS_TOKEN" },
+    { "key": "ticketId", "value": "PASTE_TICKET_OBJECT_ID" },
+    { "key": "agentId", "value": "PASTE_SUPPORT_AGENT_OBJECT_ID" },
+    { "key": "webhookSecret", "value": "SET_IN_BACKEND_ENV" }
+  ],
+  "item": [
+    { "name": "Categories", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/categories" } },
+    { "name": "Create ticket", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"subject\": \"Unable to login to my account\",\n  \"description\": \"I cannot log in to my account. Please help me.\",\n  \"category\": \"Technical Support\",\n  \"priority\": \"high\"\n}" }, "url": "{{baseUrl}}/api/tickets" } },
+    { "name": "Get all tickets", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/tickets?page=1&limit=10" } },
+    { "name": "Get ticket by ID", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/tickets/{{ticketId}}" } },
+    { "name": "Update ticket", "request": { "method": "PATCH", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"subject\": \"Unable to login - updated\",\n  \"description\": \"I still cannot log in. Please investigate.\"\n}" }, "url": "{{baseUrl}}/api/tickets/{{ticketId}}" } },
+    { "name": "Assign or reassign ticket (Admin)", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"assignedTo\": \"{{agentId}}\"\n}" }, "url": "{{baseUrl}}/api/tickets/{{ticketId}}/assign" } },
+    { "name": "Unassign ticket (Admin)", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"assignedTo\": null\n}" }, "url": "{{baseUrl}}/api/tickets/{{ticketId}}/assign" } },
+    { "name": "Resolve ticket (Assigned Agent/Admin)", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/tickets/{{ticketId}}/resolve" } },
+    { "name": "Reopen ticket (Owner/Assigned Agent/Admin)", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/tickets/{{ticketId}}/reopen" } },
+    { "name": "Close ticket (Owner/Assigned Agent/Admin)", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/tickets/{{ticketId}}/close" } },
+    { "name": "Get conversation", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/tickets/{{ticketId}}/messages" } },
+    { "name": "Add public reply", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"body\": \"We are checking this issue and will update you shortly.\",\n  \"type\": \"public\"\n}" }, "url": "{{baseUrl}}/api/tickets/{{ticketId}}/messages" } },
+    { "name": "Add internal note (Agent/Admin)", "request": { "method": "POST", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"body\": \"Verify the customer identity before resetting the account.\",\n  \"type\": \"internal\"\n}" }, "url": "{{baseUrl}}/api/tickets/{{ticketId}}/messages" } },
+    { "name": "Get activity timeline", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/tickets/{{ticketId}}/activity" } },
+    { "name": "Dashboard summary", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }], "url": "{{baseUrl}}/api/dashboard/summary" } },
+    { "name": "Inbound email reply (provider adapter)", "request": { "method": "POST", "header": [{ "key": "x-inbound-webhook-secret", "value": "{{webhookSecret}}" }, { "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"ticketNumber\": \"TKT-EXAMPLE\",\n  \"from\": \"verified-requester@example.com\",\n  \"subject\": \"Re: Unable to login\",\n  \"text\": \"I tried again and the issue is still happening.\",\n  \"messageId\": \"unique-provider-message-id\"\n}" }, "url": "{{baseUrl}}/api/email/inbound" } }
+  ]
+}
