@@ -1,6 +1,9 @@
 #  – Ticketing & Email Support System
 A full-stack customer support and ticket management platform built using the MERN stack. It allows customers to create and track support tickets, support agents to manage and respond to tickets, and administrators to manage support operations.
 
+manisth230_db_user
+PM2gzgcNg6KhstVq
+
 ## 🚀 Tech Stack
 
 ### Frontend
