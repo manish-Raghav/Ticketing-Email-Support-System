@@ -1,0 +1,201 @@
+#  – Ticketing & Email Support System
+A full-stack customer support and ticket management platform built using the MERN stack. It allows customers to create and track support tickets, support agents to manage and respond to tickets, and administrators to manage support operations.
+
+## 🚀 Tech Stack
+
+### Frontend
+- React.js
+- Vite
+- Tailwind CSS
+- Redux Toolkit
+- Axios
+- React Router DOM
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- bcrypt
+- Nodemailer
+
+## 👥 User Roles
+
+### Customer
+- Register and log in.
+- Verify email using OTP.
+- Create support tickets.
+- View and track personal tickets.
+- Reply to tickets.
+- Close and reopen eligible tickets.
+
+### Support Agent
+- View assigned tickets.
+- Respond to customer queries.
+- Add internal notes.
+- Update ticket status and priority.
+- Resolve and reopen tickets.
+
+### Admin
+- View and manage all tickets.
+- Assign and reassign tickets.
+- Manage users and support agents.
+- Monitor ticket activity.
+- View dashboard statistics.
+
+## ✨ Key Features
+
+- Role-based authentication and authorization.
+- Email OTP verification.
+- Forgot and reset password.
+- JWT-based authentication.
+- Ticket creation and management.
+- Ticket assignment and reassignment.
+- Ticket conversation system.
+- Internal notes for support staff.
+- Ticket activity history.
+- Priority and status management.
+- Dashboard statistics.
+- Responsive user interface.
+- Email notification integration.
+
+## 📁 Project Structure
+
+```text
+SupportDesk/
+│
+├── Backend/
+│   ├── Src/
+│   │   ├── Config/
+│   │   ├── Controllers/
+│   │   ├── Models/
+│   │   ├── Routes/
+│   │   ├── Middleware/
+│   │   ├── Services/
+│   │   └── Utils/
+│   ├── .env.example
+│   └── package.json
+│
+├── FrontEnd/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── features/
+│   │   ├── pages/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   └── store/
+│   ├── .env.example
+│   └── package.json
+│
+└── README.md
+```
+
+*Folder names may vary depending on your existing project structure.*
+
+## ⚙️ Installation and Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/manish-Raghav/Ticketing-Email-Support-System
+```
+
+```bash
+cd SupportDesk-MERN
+```
+
+### 2. Backend Setup
+
+```bash
+cd Backend
+npm install
+```
+
+Create a `.env` file using `.env.example`.
+
+Configure:
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+CLIENT_URL=http://localhost:5173
+
+EMAIL_HOST=your_smtp_host
+EMAIL_PORT=your_smtp_port
+EMAIL_USER=your_email
+EMAIL_PASS=your_email_password
+```
+
+Start the backend:
+
+```bash
+npm run dev
+```
+
+### 3. Frontend Setup
+
+Open another terminal:
+
+```bash
+cd FrontEnd
+npm install
+```
+
+Create a `.env` file:
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+Start the frontend:
+
+```bash
+npm run dev
+```
+
+## 🔗 API Modules
+
+| Module | Description |
+|---|---|
+| Authentication | Registration, login, OTP and password reset |
+| Tickets | Ticket creation and management |
+| Messages | Customer and agent conversations |
+| Categories | Ticket categories |
+| Dashboard | Ticket statistics |
+| Email | Email notification and inbound webhook adapter |
+| Admin | User and agent management |
+
+## 🔐 Security
+
+- Password hashing with bcrypt.
+- JWT authentication.
+- Role-based access control.
+- CORS configuration.
+- Helmet security headers.
+- API rate limiting.
+- Environment-based secrets.
+
+## 🚧 Future Improvements
+
+- Complete two-way email integration using IMAP or provider webhooks.
+- Refresh-token rotation and session management.
+- Phone OTP authentication.
+- Real-time notifications using Socket.IO.
+- File attachment uploads.
+- Redis and BullMQ background email processing.
+- Swagger API documentation.
+- Automated testing.
+
+## 👨‍💻 Author
+
+**Manish Kumar**
+
+MERN Stack Developer
+
+GitHub: https://github.com/YOUR_USERNAME
+
+---
+
+⭐ If you find this project useful, consider giving it a star!
