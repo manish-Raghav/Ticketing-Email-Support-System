@@ -7,6 +7,8 @@ import {
   forgetPassword,
   resetPassword,
   verifyEmail,
+  sendLoginOTP,
+  verifyLoginOTP,
 } from "../Controller/authController.js";
 
 import { protect } from "../Middleware/authMiddileware.js";
@@ -16,6 +18,10 @@ const router = express.Router();
 // Authentication
 router.post("/register", register);
 router.post("/login", login);
+
+// Email + OTP Login
+router.post("/login-otp", sendLoginOTP);
+router.post("/verify-login-otp", verifyLoginOTP);
 
 // Email verification
 router.post("/verify-email", verifyEmail);

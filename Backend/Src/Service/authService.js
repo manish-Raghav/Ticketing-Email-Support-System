@@ -101,6 +101,66 @@ class AuthService {
     };
   }
 
+
+   // SEND LOGIN OTP
+async sendLoginOTP(email) {
+  const normalizedEmail = email.trim().toLowerCase();
+
+  const user = await userRepository.findByEmail(normalizedEmail);
+
+  // Do not reveal whether an account exists.
+  if (!user || !user.isEmailVerified || !user.isActive) {
+    return {
+      message: "If an eligible account exists, a login OTP will be sent",
+    };
+  }
+
+  await OtpService.sendOTP(
+    normalizedEmail,
+    "login",
+    "Login OTP",
+    "Verify Your Login"
+  );
+
+  return {
+    message: "If an eligible account exists, a login OTP will be sent",
+  };
+}
+
+
+
+
+   // VERIFY LOGIN OTP
+async verifyLoginOTP(email, otp) {
+  const normalizedEmail = email.trim().toLowerCase();
+
+  const user = await userRepository.findByEmail(normalizedEmail);
+
+  if (!user || !user.isEmailVerified || !user.isActive) {
+    throw new Error("Invalid email or OTP");
+  }
+
+  const otpRecord = await OtpService.verifyOTP(
+    normalizedEmail,
+    otp,
+    "login"
+  );
+
+  // Delete OTP after successful verification.
+  await OtpRepository.deleteById(otpRecord._id);
+
+  return {
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
+    token: generateToken(user),
+  };
+}
+
+
   // VERIFY EMAIL OTP: create the permanent User only after a valid OTP.
   async verifyEmailOTP(email, otp) {
     const normalizedEmail = email.trim().toLowerCase();

@@ -96,6 +96,66 @@ export const login = async (req, res) => {
 };
 
 
+
+
+// SEND LOGIN OTP
+export const sendLoginOTP = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: "Email is required",
+      });
+    }
+
+    const result = await AuthService.sendLoginOTP(email);
+
+    return res.status(200).json({
+      success: true,
+      message: result.message,
+    });
+
+  } catch (error) {
+    return res.status(error.statusCode || 500).json({
+      success: false,
+      message: error.message || "Unable to send login OTP",
+    });
+  }
+};
+
+
+// VERIFY LOGIN OTP
+export const verifyLoginOTP = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    if (!email || !otp) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and OTP are required",
+      });
+    }
+
+    const result = await AuthService.verifyLoginOTP(email, otp);
+
+    return res.status(200).json({
+      success: true,
+      message: "Login successful",
+      data: result,
+    });
+
+  } catch (error) {
+    return res.status(error.statusCode || 401).json({
+      success: false,
+      message: error.message || "OTP verification failed",
+    });
+  }
+};
+
+
+
 // FORGOT PASSWORD
 export const forgetPassword = async (req, res) => {
   try {
