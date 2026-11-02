@@ -1,8 +1,6 @@
-#  – Ticketing & Email Support System
-A full-stack customer support and ticket management platform built using the MERN stack. It allows customers to create and track support tickets, support agents to manage and respond to tickets, and administrators to manage support operations.
+# 🎫 Ticketing & Email Support System
 
-manisth230_db_user
-PM2gzgcNg6KhstVq
+A full-stack customer support and ticket management platform built using the MERN stack. It allows customers to create and track support tickets, support agents to manage and respond to tickets, and administrators to manage support operations.
 
 ## 🚀 Tech Stack
 
@@ -20,7 +18,7 @@ PM2gzgcNg6KhstVq
 - MongoDB
 - Mongoose
 - JWT Authentication
-- bcrypt
+- bcryptjs
 - Nodemailer
 
 ## 👥 User Roles
@@ -71,12 +69,16 @@ SupportDesk/
 ├── Backend/
 │   ├── Src/
 │   │   ├── Config/
-│   │   ├── Controllers/
+│   │   ├── Controller/
 │   │   ├── Models/
 │   │   ├── Routes/
 │   │   ├── Middleware/
-│   │   ├── Services/
-│   │   └── Utils/
+│   │   ├── Repository/
+│   │   ├── Service/
+│   │   ├── Seed/
+│   │   │   └── createAdmin.js
+│   │   └── utils/
+│   ├── scripts/
 │   ├── .env.example
 │   └── package.json
 │
@@ -101,11 +103,11 @@ SupportDesk/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/manish-Raghav/Ticketing-Email-Support-System
+git clone https://github.com/manish-Raghav/Ticketing-Email-Support-System.git
 ```
 
 ```bash
-cd SupportDesk-MERN
+cd Ticketing-Email-Support-System
 ```
 
 ### 2. Backend Setup
@@ -117,11 +119,11 @@ npm install
 
 Create a `.env` file using `.env.example`.
 
-Configure:
+Configure the following environment variables:
 
 ```env
 PORT=5000
-MONGO_URI=your_mongodb_connection_string
+MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 CLIENT_URL=http://localhost:5173
 
@@ -131,13 +133,55 @@ EMAIL_USER=your_email
 EMAIL_PASS=your_email_password
 ```
 
-Start the backend:
+Add all other environment variables required by your backend configuration.
+
+### 3. Create the First Admin Account
+
+The first Admin account is created using a secure seed script.
+
+Public registration does not allow users to register as Admin. The initial Admin must be created manually by the company during project setup.
+
+Add the following variables to your `Backend/.env` file:
+
+```env
+ADMIN_NAME=Company Admin
+ADMIN_EMAIL=admin@yourcompany.com
+ADMIN_PASSWORD=YourStrongTemporaryPassword123!
+```
+
+Use your own Admin details and a strong password. Never commit your `.env` file to GitHub.
+
+Run the following command from the `Backend` directory:
+
+```bash
+npm run seed:admin
+```
+
+If successful, you should see:
+
+```text
+MongoDB connected
+Admin created successfully!
+Admin Email: admin@yourcompany.com
+Admin ID: ...
+```
+
+The first Admin can now log in using the configured email and password.
+
+**Important Security Notes:**
+- Run the Admin seed command only when creating the initial Admin account.
+- The script will not create another account if the email already exists.
+- Public users cannot select the Admin role during registration.
+- Admin accounts should be created through a secure administrative process.
+- Change the temporary Admin password after the first login.
+
+### 4. Start the Backend
 
 ```bash
 npm run dev
 ```
 
-### 3. Frontend Setup
+### 5. Frontend Setup
 
 Open another terminal:
 
@@ -167,18 +211,19 @@ npm run dev
 | Messages | Customer and agent conversations |
 | Categories | Ticket categories |
 | Dashboard | Ticket statistics |
-| Email | Email notification and inbound webhook adapter |
+| Email | Email notifications and inbound webhook adapter |
 | Admin | User and agent management |
 
 ## 🔐 Security
 
-- Password hashing with bcrypt.
+- Password hashing with bcryptjs.
 - JWT authentication.
 - Role-based access control.
 - CORS configuration.
 - Helmet security headers.
 - API rate limiting.
 - Environment-based secrets.
+- Restricted public Admin registration.
 
 ## 🚧 Future Improvements
 
@@ -195,9 +240,9 @@ npm run dev
 
 **Manish Kumar**
 
-MERN Stack Developer
+Software Developer
 
-GitHub: https://github.com/YOUR_USERNAME
+GitHub: https://github.com/manish-Raghav
 
 ---
 

@@ -9,6 +9,7 @@
     "dev": "nodemon App.js",
     "check": "node scripts/checkSyntax.js",
     "seed:categories": "node scripts/seedCategories.js",
+    "seed:admin": "node Src/Seed/createAdmin.js",
     "migrate:ticket-categories": "node scripts/migrateTicketCategories.js"
   },
   "dependencies": {
