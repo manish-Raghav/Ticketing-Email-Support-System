@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "main": "App.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node App.js",
-    "dev": "nodemon App.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "check": "node scripts/checkSyntax.js",
     "seed:categories": "node scripts/seedCategories.js",
     "seed:admin": "node Src/Seed/createAdmin.js",
